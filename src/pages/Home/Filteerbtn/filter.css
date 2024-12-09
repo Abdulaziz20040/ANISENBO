@@ -1,0 +1,189 @@
+.button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.filter-button {
+  background-color: #00cfff; /* Light blue color */
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: #000; /* Black text */
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.filter-button:hover {
+  background-color: #00b3e0; /* Darker blue on hover */
+}
+
+.modal_leftHeader {
+  width: 100px;
+  height: 83vh;
+  background-color: #f39a3a;
+  -webkit-box-shadow: 0px 4px 19px -7px rgba(34, 60, 80, 0.28);
+  -moz-box-shadow: 0px 4px 19px -7px rgba(34, 60, 80, 0.28);
+  box-shadow: 0px 4px 19px -7px rgba(34, 60, 80, 0.28);
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+}
+.icon_hover {
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.icon_hover:hover {
+  background-color: rgb(240, 75, 111) !important;
+  transition: 0.2s ease-in-out;
+}
+
+.content {
+  background-color: rgb(255, 255, 255);
+  -webkit-box-shadow: 0px 4px 19px -7px rgba(34, 60, 80, 0.28);
+  -moz-box-shadow: 0px 4px 19px -7px rgba(34, 60, 80, 0.28);
+  box-shadow: 0px 4px 19px -7px rgba(34, 60, 80, 0.28);
+}
+
+@media (max-width: 640px) {
+  .modal_leftHeader {
+    display: none;
+  }
+}
+
+.premium-glossy-button {
+  background: linear-gradient(135deg, #00b3e0, #33ccff);
+  background-size: 200% 200%;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-glossy-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.premium-glossy-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: skewX(-45deg);
+  filter: blur(8px);
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0;
+}
+
+.premium-glossy-button:hover::before {
+  opacity: 1;
+  animation: shine 3s ease-in-out 1; /* Animatsiya faqat bir marta ishga tushadi */
+}
+
+@keyframes shine {
+  0% {
+    left: -75%;
+  }
+  50% {
+    left: 125%;
+  }
+  100% {
+    left: -75%;
+    opacity: 0; /* Animatsiya tugagach, oq chiziq yo'qoladi */
+  }
+}
+
+.premium-glossy-button:focus {
+  outline: none;
+}
+
+.custom-drawer .ant-drawer-body {
+  position: relative;
+  overflow: hidden; /* Ortiqcha chiqishlarni oldini olish uchun */
+}
+
+.custom-drawer::before {
+  content: "";
+  background-position: center;
+  background-color: #e1f5f4;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(10px); /* Blur effekt faqat
+     background uchun */
+  opacity: 0.9; /* Rasmning opasiteligi */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1; /* Fon rasm pastda qolishi uchun */
+}
+.drawer-content {
+  position: relative;
+  z-index: 2;
+  padding-left: 18px;
+  padding-top: 18px;
+  width: 80px; /* Kengligi */
+  height: 90vh; /* Balandligi */
+  border-radius: 30px; /* Burchaklarni yumaloqlash */
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.295); /* Ichkaridan box-shadow */
+  background-image: url("https://i.pinimg.com/564x/56/e6/cb/56e6cbe64977124b58141ce3db7a0d50.jpg");
+  background-position: center;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Ikonalar orasidagi masofa */
+  margin-top: 20px;
+}
+
+.icon {
+  background: white; /* Dastlabki fon oq */
+  border-radius: 50%; /* Dastlabki chap tomoni yumaloqlash */
+  padding: 15px; /* Ikonani o'rab turuvchi bo'shliq */
+  transition: transform 0.5s ease, background 0.5s ease, border-radius 0.5s ease; /* Animatsiya */
+  cursor: pointer; /* Kursorni ko'rsatish */
+  border: 2px solid transparent; /* Dastlabki chegarani shaffof qilish */
+  width: 48px;
+}
+
+.icon:hover {
+  background: #e1f5f4; /* Bosilganda fon oq bo'ladi */
+  border-radius: 30px 0 0 30px; /* Chap tomoni yumaloqlash, o'ng tomoni tekis */
+  width: 100%;
+  color: rgb(255, 0, 0);
+}
+
+.active {
+  background: #e1f5f4; /* Bosilganda fon oq bo'ladi */
+  border-radius: 30px 0 0 30px; /* Chap tomoni yumaloqlash, o'ng tomoni tekis */
+  transform: scale(1.1); /* Kattalashadi */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.126); /* 3D effekt */
+  color: rgb(255, 0, 0);
+  width: 96%;
+}
+
+.side-content {
+  padding: 20px;
+  z-index: 2;
+  border-radius: 15px; /* Burchaklarni yumaloqlash */
+  /* background-color: #ffffff; */
+  background-color: white;
+}
+
+.editMuenu img {
+  width: 100%; /* Kontent kengligini sozlash */
+  height: auto;
+}

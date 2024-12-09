@@ -1,0 +1,261 @@
+/* login css */
+
+.bordER {
+  clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+  border-radius: 5px;
+}
+
+/* Background Image */
+.bg-image-container {
+  background-image: url("https://anilife.vercel.app/static/media/vedio.d1a1d71b52d92096f352.gif");
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Full viewport height */
+}
+
+/* Form Container */
+.form-container {
+  /* background-color: #1f2937; */
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* Input Fields */
+.input-field {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background-color: #fbfdff2c;
+  color: white;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+.input-field:focus {
+  outline: 2px solid #2563eb;
+}
+
+/* Button Styles */
+.btn-primary {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #ef4444;
+  color: white;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #dc2626;
+}
+
+/* Responsiv */
+/* @media (min-width: 1024px) {
+  .lg\:w-7\/10 {
+    flex-basis: 70%;
+  }
+
+  .lg\:w-3\/10 {
+    flex-basis: 30%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .bg-image-container {
+    height: 40vh;
+  }
+
+  .form-container {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+} */
+
+/* new card css */
+
+.newBtn {
+  background: linear-gradient(90deg, #ff0, orange); /* Gradient background */
+  text-align: center;
+  font-size: 15px;
+  padding: 2px 4px; /* Adjust padding for better button size */
+  font-weight: bold; /* Bold text */
+  border: none; /* Remove border */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* scrollbar scroll color */
+
+/* Customize scrollbar for webkit browsers */
+.custom-scrollbar {
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #47dae4 transparent; /* For Firefox */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 3px; /* Set the scrollbar width */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #47dae4; /* Set the scrollbar thumb color to green */
+  border-radius: 5px; /* Make the scrollbar thumb rounded */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent; /* Set the track background to transparent */
+}
+
+/* newcard css */
+
+.radusborder {
+  border-radius: 100% 0% 0% 100% / 48% 30% 70% 52%;
+  background-color: rgba(
+    111,
+    66,
+    193,
+    0.1
+  ) !important; /* Light black background with 50% opacity */
+  backdrop-filter: blur(25px); /* Blur effect */
+  -webkit-backdrop-filter: blur(25px); /* For Safari */
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.bacgroountrans {
+  background-color: rgba(
+    111,
+    66,
+    193,
+    0.1
+  ); /* Light black background with 50% opacity */
+  backdrop-filter: blur(25px); /* Blur effect */
+  -webkit-backdrop-filter: blur(25px); /* For Safari */
+  transition: all 0.3s ease; /* Smooth transition */
+  border: none;
+}
+
+/* header css */
+
+/* Add a sliding animation from left to right */
+@keyframes slideFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Applied to mobile menu */
+.mobile-menu {
+  animation: slideFromLeft 0.5s ease-in-out forwards;
+}
+
+/* vedioplayer css */
+
+.bacgrooundDetals {
+  background-color: rgba(
+    32,
+    32,
+    49,
+    0.5
+  ); /* Light black background with 50% opacity */
+  backdrop-filter: blur(25px); /* Blur effect */
+  -webkit-backdrop-filter: blur(25px); /* For Safari */
+  transition: all 0.3s ease; /* Smooth transition */
+  border: none;
+}
+
+/* profil css */
+
+/* Active tab styling */
+.activeTabSty {
+  background: linear-gradient(
+    45deg,
+    #47dae4,
+    #36b8f5
+  ); /* Gradient background */
+  color: white; /* White text color */
+  box-shadow: 0 6px 20px rgba(72, 168, 242, 0.5); /* Enhanced shadow effect */
+  transform: scale(1.1); /* Slight scale effect on active tab */
+  z-index: 2; /* Ensure the active tab is always on top */
+  border-radius: 60px;
+}
+
+/* Default tab styling */
+.activeTabdefault {
+  color: rgb(255, 255, 255); /* Black text */
+}
+/* Add this to your global CSS */
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 40px;
+  display: inline-block;
+  border-radius: 100px;
+  transition: all 0.2s;
+  position: absolute;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-white {
+  color: #ffffff;
+}
+
+.btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.btn-white::after {
+  background-color: #fff;
+}
+
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.btn-animated {
+  animation: moveInBottom 5s ease-out;
+  animation-fill-mode: backwards;
+}
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
