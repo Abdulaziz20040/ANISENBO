@@ -1,14 +1,29 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { CiCircleInfo } from "react-icons/ci";
+import { CiBookmarkPlus, CiCircleInfo, CiHeart } from "react-icons/ci";
 import { GoPlay } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { aniDubApi } from "../../Api/Api";
+import { useProduct } from "../../context/Context";
 
 function Card() {
   const [data, setData] = useState([]);
   const [hoveredItem, setHoveredItem] = useState(null);
   const [modalPosition, setModalPosition] = useState("right");
+  const { addToFavorite, favorite, deleteFromFavorite } = useProduct();
+
+  const handleFavorite = (item) => {
+    const isAdded = addToFavorite(item);
+    const isInFavorites = favorite.some((fav) => fav.id === item.id);
+
+    if (isInFavorites) {
+      deleteFromFavorite(item.id);
+      // alert("Removed from favorites");
+    } else {
+      addToFavorite(item);
+      // alert("Added to favorites");
+    }
+  };
 
   useEffect(() => {
     axios.get(aniDubApi).then((res) => {
@@ -101,15 +116,26 @@ function Card() {
                 onMouseEnter={() => handleMouseEnter(item, index)}
                 onMouseLeave={handleMouseLeave}
               >
-                <h2 className="text-2xl font-semibold mb-3">
-                  <Link
-                    to={`/details/${item.id}`}
-                    className="hover:text-blue-200"
+                <div className=" w-full flex items-start justify-between">
+                  <h2 className="text-2xl font-semibold mb-3">
+                    <Link
+                      to={`/details/${item.id}`}
+                      className="hover:text-blue-200"
+                    >
+                      <q>{item.name}</q>
+                    </Link>
+                  </h2>
+                  <button
+                    onClick={() => handleFavorite(item)}
+                    className={`text-3xl ${
+                      favorite.some((fav) => fav.id === item.id)
+                        ? "text-red-500"
+                        : "text-gray-500"
+                    }`}
                   >
-                    <q>{item.name}</q>
-                  </Link>
-                </h2>
-
+                    <CiBookmarkPlus />
+                  </button>
+                </div>
                 <p className=" text-sm leading-relaxed overflow-y-auto h-[120px] custom-scrollbar mb-6">
                   {item.desc}
                 </p>

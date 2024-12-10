@@ -113,7 +113,7 @@ const Animation = () => {
             <div className="relative z-10 text-white px-4 md:px-12">
               <div className="media">
                 <div className="widdf">
-                  <h3 className="titfd text-xl sm:text-2xl md:text-3xl">
+                  <h3 className="titfd text-xl sm:text-2xl mb-4 md:text-3xl">
                     {slide.name}
                   </h3>
 

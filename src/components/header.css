@@ -19,24 +19,24 @@ nav {
   border-radius: 3px;
 }
 
+.seachContainer {
+  position: absolute;
+  width: 400px !important;
+  top: 73px;
+  right: 144px;
+  background-color: #0000009b !important;
+  border-radius: 7px;
+  font-size: 15px;
+}
+
 .respons {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.seachContainer {
-  position: absolute;
-  width: 260px !important;
-  top: 73px;
-  right: 44px;
-  background-color: #0000009b !important;
-  border-radius: 7px;
-  font-size: 15px;
-}
-
 .search-input {
-  width: 220px;
+  width: 400px;
   padding: 8px 20px;
   border-radius: 18px;
   background: rgba(0, 0, 0, 0.464);

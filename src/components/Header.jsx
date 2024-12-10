@@ -4,9 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Drawer } from "antd";
 import "../App.css";
-import { IoChatboxEllipses, IoDuplicate } from "react-icons/io5";
+import { IoChatboxEllipses, IoDuplicate, IoSearch } from "react-icons/io5";
 import { SiYoutubeshorts } from "react-icons/si";
-import { FiSearch } from "react-icons/fi";
 import "./header.css";
 import { FaSearch } from "react-icons/fa";
 import { aniDubApi } from "../Api/Api";
@@ -14,6 +13,8 @@ import { aniDubApi } from "../Api/Api";
 function Header() {
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef(null);
@@ -24,11 +25,32 @@ function Header() {
     setIsOpen((prev) => !prev);
   };
 
+  const handleSearchChange = async (e) => {
+    setSearchTerm(e.target.value);
+
+    if (e.target.value) {
+      try {
+        const response = await fetch(`${aniDubApi}?name=*${e.target.value}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch search results");
+        }
+        const data = await response.json();
+        setSearchResults(data);
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+        setSearchResults([]); // Clear results on error
+      }
+    } else {
+      setSearchResults([]);
+    }
+  };
+
   //inputni yopish
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
         setIsOpen(false);
+        setSearchTerm("");
       }
     };
 
@@ -107,7 +129,7 @@ function Header() {
         absolute left-0 mt-2 bg-blue-300
         w-0 h-0 opacity-0 overflow-hidden 
         transition-all duration-500 ease-in-out 
-        group-hover:max-w-[240px] group-hover:w-auto group-hover:h-auto px-3 py-3 flex gap-3 group-hover:opacity-100 rounded-lg
+        group-hover:w-[440px] group-hover:h-auto px-3 py-3 flex flex-wrap gap-3 group-hover:opacity-100 rounded-lg
       "
                 >
                   {data.map((item) => (
@@ -136,28 +158,64 @@ function Header() {
                 ref={wrapperRef}
                 className="flex items-center space-x-2 relative"
               >
-                <button
-                  onClick={toggleSearchInput}
-                  className=" focus:outline-none cursor-pointer text-center flex flex-col items-center transition duration-300 ease-in-out transform "
-                >
-                  <FaSearch className="text-[#e96fae] size-[18px] hover:animate-bounce" />
-                  <span>Search</span>
-                </button>
-
                 {/* Search Input */}
-                <input
-                  ref={inputRef}
-                  type="text"
-                  placeholder="Izlang..."
-                  style={{
-                    marginLeft: "70px",
-                  }}
-                  className={`absolute -mt-2 search-input  left-0 transform focus:outline-none transition-transform duration-300 ${
-                    isOpen
-                      ? "translate-x-0 opacity-100"
-                      : "translate-x-full opacity-0"
-                  }`}
-                />
+                <div className="relative">
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    placeholder="Izlang..."
+                    style={{
+                      marginLeft: "70px",
+                    }}
+                    className={`  search-input transform focus:outline-none transition-transform duration-300`}
+                  />
+                  <div className=" absolute top-0 -right-36">
+                    {searchTerm && searchResults.length > 0 && (
+                      <div
+                        className="seachContainer overflow-y-auto"
+                        style={{
+                          height: "auto",
+                          maxHeight: "290px",
+                          backgroundColor: "#1e1e1e",
+                          overflowY: "scroll",
+                          scrollbarWidth: "thin",
+                          scrollbarColor: "#00F0FF #1e1e1e",
+                        }}
+                      >
+                        {searchResults.map((result) => (
+                          <Link to={`/details/${result.id}`}>
+                            <div
+                              key={result.id}
+                              className="flex items-center p-2 gap-2"
+                            >
+                              <div
+                                style={{
+                                  width: "60px", // Set a fixed width
+                                  height: "60px", // Set a fixed height
+                                  cursor: "pointer",
+                                }}
+                              >
+                                <img
+                                  style={{
+                                    width: "100%", // Ensure the image scales to the container width
+                                    height: "100%", // Ensure the image scales to the container height
+                                    overflow: "hidden",
+                                    borderRadius: "10px",
+                                  }}
+                                  src={result.img}
+                                  alt={result.name}
+                                />
+                              </div>
+                              <span className="text-white">{result.name}</span>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
               </li>
             </div>
 

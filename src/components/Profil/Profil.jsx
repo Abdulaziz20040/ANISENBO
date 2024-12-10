@@ -6,6 +6,7 @@ import { profilBacgrounimg, userDate } from "../../Api/Api";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./profil.css";
+import Favorites from "./Favorites";
 
 function Profil() {
   const [activTab, setActiveTab] = useState("profil");
@@ -153,7 +154,7 @@ function Profil() {
         {activTab === "sevimlilar" && (
           <div className="overflow-y-auto h-[47vh] scrollbar-hide">
             <div className="mt-4">
-              <div>Sevimlilar</div>
+              <Favorites />
             </div>
           </div>
         )}

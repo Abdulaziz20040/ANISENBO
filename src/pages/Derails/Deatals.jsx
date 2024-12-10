@@ -7,6 +7,8 @@ import { aniDubApi } from "../../Api/Api";
 import Header from "../../components/Header";
 import "./Detals.css";
 import { Skeleton } from "antd";
+import { CiBookmarkPlus } from "react-icons/ci";
+import { useProduct } from "../../context/Context";
 
 // Comments Component
 function Comments({ item }) {
@@ -28,6 +30,18 @@ function Details() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [activeTab, setActiveTab] = useState("izohlar");
+  const { addToFavorite, favorite, deleteFromFavorite } = useProduct();
+
+  const handleFavorite = (item) => {
+    const isAdded = addToFavorite(item);
+    const isInFavorites = favorite.some((fav) => fav.id === item.id);
+
+    if (isInFavorites) {
+      deleteFromFavorite(item.id);
+    } else {
+      addToFavorite(item);
+    }
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -80,9 +94,21 @@ function Details() {
             >
               {/* Info Section */}
               <div className="w-full lg:w-[300px] bacgrooundDetals p-4 text-white rounded-lg flex-shrink-0">
-                <h2 className="text-2xl font-semibold text-[#47dae4] tracking-wide border-b-2 pb-2 border-[#47dae4] mb-4">
-                  {item?.name || "Noma'lum"}
-                </h2>
+                <div className="flex items-start justify-between">
+                  <h2 className="text-2xl font-semibold text-[#47dae4] tracking-wide border-b-2 pb-2 border-[#47dae4] mb-4">
+                    {item?.name || "Noma'lum"}
+                  </h2>
+                  <button
+                    onClick={() => handleFavorite(item)}
+                    className={`text-3xl ${
+                      favorite.some((fav) => fav.id === item.id)
+                        ? "text-red-500"
+                        : "text-gray-500"
+                    }`}
+                  >
+                    <CiBookmarkPlus />
+                  </button>
+                </div>
                 <p className=" text-sm leading-relaxed tracking-wide overflow-y-auto h-[200px] custom-scrollbar mb-6">
                   {item?.desc}
                 </p>
