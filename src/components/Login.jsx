@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa"; // Icons
 import "../App.css";
 import { IoIosLogOut } from "react-icons/io";
-import { FaCircleUser } from "react-icons/fa6";
 import axios from "axios";
 import { userDate } from "../Api/Api";
 
@@ -58,18 +57,24 @@ const Login = () => {
   };
 
   const handleFormSubmit = () => {
-    if (!name || !password) {
-      toast.error("Iltimos, barcha maydonlarni to'ldiring!");
-      return;
-    }
-
     if (!isLogin && password !== repeatPassword) {
       toast.error("Parollar mos kelmaydi!");
       return;
     }
 
+    // Foydalanuvchi nomi mavjudligini tekshirish
+    const existingUser = data.find((user) => user.name === name);
+    if (existingUser) {
+      toast.error(
+        "Bunday foydalanuvchi allaqachon mavjud. Iltimos, boshqa nom kiriting!"
+      );
+      return;
+    }
+
+    // Foydalanuvchini muvaffaqiyatli ro'yxatdan o'tkazish yoki tizimga kirish
     toast.success(isLogin ? "Tizimga kirdingiz!" : "Ro'yxatdan o'tdingiz!");
 
+    // Mahalliy xotiraga saqlash
     localStorage.setItem("name", name);
     localStorage.setItem("password", password);
 
@@ -79,6 +84,7 @@ const Login = () => {
       date: new Date().toISOString(),
     };
 
+    // Ma'lumotlarni serverga yuborish
     axios
       .post(userDate, dataToSend)
       .then((response) => {

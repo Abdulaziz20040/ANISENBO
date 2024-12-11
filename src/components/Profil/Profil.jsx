@@ -61,11 +61,11 @@ function Profil() {
           className="relative"
           style={{
             backgroundImage: `url(${userBackgroundImg})`,
-            backgroundPosition: "center",
+            backgroundPosition: "end",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             borderRadius: "10px",
-            height: "45vh",
+            height: "35vh",
           }}
         >
           <div className="absolute bottom-0 left-0">
@@ -136,16 +136,6 @@ function Profil() {
               </div>
 
               {/* calendar */}
-
-              <div className="relative">
-                <DatePicker
-                  selected={selectedDate}
-                  onChange={(date) => setSelectedDate(date)}
-                  dateFormat="yyyy-MM-dd"
-                  className="p-4 mt-2 w-full rounded-xl shadow-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 text-lg font-medium text-gray-800 bg-white transition-all ease-in-out duration-300"
-                  inline
-                />
-              </div>
             </div>
           </div>
         )}
