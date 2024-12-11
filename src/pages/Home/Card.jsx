@@ -111,7 +111,7 @@ function Card() {
               <div
                 className={`absolute -top-16 ${
                   modalPosition === "left" ? "right-8" : "left-full"
-                } bacgroountrans ms-4 text-white p-6 w-[280px] rounded-xl shadow-2xl z-20 border border-gray-200`}
+                } bacgroountrans ms-2 text-white p-6 w-[280px] rounded-xl shadow-2xl z-20 border border-gray-200`}
                 onMouseEnter={() => handleMouseEnter(item, index)}
                 onMouseLeave={handleMouseLeave}
               >

@@ -21,8 +21,6 @@ function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const username = localStorage.getItem("name");
 
-  const [shortss, setshortss] = useState([]);
-
   const handleSearchChange = async (e) => {
     setSearchTerm(e.target.value);
 
@@ -93,17 +91,6 @@ function Header() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  useEffect(() => {
-    axios
-      .get(shorts)
-      .then((res) => {
-        setshortss(res.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  });
 
   return (
     <div className="">
@@ -177,11 +164,11 @@ function Header() {
                     onChange={handleSearchChange}
                     placeholder="Izlang..."
                     style={{
-                      marginLeft: "70px",
+                      marginLeft: "30px",
                     }}
                     className={`  search-input transform focus:outline-none transition-transform duration-300`}
                   />
-                  <div className=" absolute top-0 -right-36">
+                  <div className=" absolute top-0 -right-306">
                     {searchTerm && searchResults.length > 0 && (
                       <div
                         className="seachContainer overflow-y-auto"
