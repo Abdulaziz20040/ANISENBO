@@ -7,8 +7,7 @@ import "../App.css";
 import { IoChatboxEllipses, IoDuplicate, IoSearch } from "react-icons/io5";
 import { SiYoutubeshorts } from "react-icons/si";
 import "./header.css";
-import { FaSearch } from "react-icons/fa";
-import { aniDubApi } from "../Api/Api";
+import { aniDubApi, shorts } from "../Api/Api";
 
 function Header() {
   const [data, setData] = useState([]);
@@ -21,9 +20,8 @@ function Header() {
   const wrapperRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const username = localStorage.getItem("name");
-  const toggleSearchInput = () => {
-    setIsOpen((prev) => !prev);
-  };
+
+  const [shortss, setshortss] = useState([]);
 
   const handleSearchChange = async (e) => {
     setSearchTerm(e.target.value);
@@ -38,14 +36,13 @@ function Header() {
         setSearchResults(data);
       } catch (error) {
         console.error("Error fetching search results:", error);
-        setSearchResults([]); // Clear results on error
+        setSearchResults([]);
       }
     } else {
       setSearchResults([]);
     }
   };
 
-  //inputni yopish
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
@@ -97,6 +94,17 @@ function Header() {
     };
   }, []);
 
+  useEffect(() => {
+    axios
+      .get(shorts)
+      .then((res) => {
+        setshortss(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  });
+
   return (
     <div className="">
       <div
@@ -142,7 +150,7 @@ function Header() {
               </div>
 
               {/* chat */}
-              <Link to={"chat"}>
+              <Link to={"/chat"}>
                 <li className="cursor-pointer text-center flex flex-col items-center">
                   <IoChatboxEllipses className="text-[#e96fae] size-[18px] hover:animate-bounce" />
                   <span>Chat</span>
@@ -150,10 +158,12 @@ function Header() {
               </Link>
 
               {/* shorts */}
-              <li className="cursor-pointer text-center flex flex-col items-center">
-                <SiYoutubeshorts className="text-[#e96fae] size-[18px] hover:animate-bounce" />
-                <span>Edit</span>
-              </li>
+              <Link to={"/edit"}>
+                <li className="cursor-pointer text-center flex flex-col items-center">
+                  <SiYoutubeshorts className="text-[#e96fae] size-[18px] hover:animate-bounce" />
+                  <span>Edit</span>
+                </li>
+              </Link>
               <li
                 ref={wrapperRef}
                 className="flex items-center space-x-2 relative"
@@ -321,10 +331,12 @@ function Header() {
                   </li>
                 </Link>
 
-                <li className="cursor-pointer text-center flex flex-col items-center">
-                  <SiYoutubeshorts className="text-[#e96fae] size-[20px] hover:animate-bounce" />
-                  <span>Edit</span>
-                </li>
+                <Link to={"shorts"}>
+                  <li className="cursor-pointer text-center flex flex-col items-center">
+                    <SiYoutubeshorts className="text-[#e96fae] size-[20px] hover:animate-bounce" />
+                    <span>Shorts</span>
+                  </li>
+                </Link>
               </div>
 
               {/* search */}

@@ -11,6 +11,7 @@ import Login from "./components/Login";
 import Profil from "./components/Profil/Profil";
 import Rotlayout from "./Rotlayout/Rotlayout";
 import Chat from "./components/Chat";
+import Shorts from "./Shorts";
 
 function App() {
   const router = createBrowserRouter([
@@ -29,6 +30,10 @@ function App() {
     {
       path: "details/:id",
       element: <Detals />,
+    },
+    {
+      path: "edit",
+      element: <Shorts />,
     },
 
     {
