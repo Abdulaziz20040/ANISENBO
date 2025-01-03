@@ -3,3 +3,4 @@ export const shorts = `${apiUrl}/Shorts`;
 export const aniDubApi = `${apiUrl}/aniDub`;
 export const userDate = `${apiUrl}/userDate`;
 export const profilBacgrounimg = `${apiUrl}/profilBacgroundimg`;
+export const slider = `${apiUrl}/Slider`;

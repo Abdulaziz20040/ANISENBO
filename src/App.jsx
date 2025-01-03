@@ -12,6 +12,7 @@ import Profil from "./components/Profil/Profil";
 import Rotlayout from "./Rotlayout/Rotlayout";
 import Chat from "./components/Chat";
 import Shorts from "./Shorts";
+import Alltezkunda from "./pages/Alltezkunda";
 
 function App() {
   const router = createBrowserRouter([
@@ -48,6 +49,11 @@ function App() {
         {
           path: "allnewCard",
           element: <Allnewcard />,
+        },
+
+        {
+          path: "allTezkunda",
+          element: <Alltezkunda />,
         },
       ],
     },

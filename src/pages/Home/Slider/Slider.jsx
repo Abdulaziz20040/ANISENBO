@@ -13,7 +13,7 @@ import Header from "../../../components/Header";
 import { IoTimeOutline, IoTimeSharp } from "react-icons/io5";
 import { CiCalendarDate } from "react-icons/ci";
 import Skeleton from "react-loading-skeleton";
-import { aniDubApi } from "../../../Api/Api";
+import { slider } from "../../../Api/Api";
 import { Link } from "react-router-dom";
 
 const Animation = () => {
@@ -23,7 +23,7 @@ const Animation = () => {
 
   useEffect(() => {
     axios
-      .get(aniDubApi)
+      .get(slider)
       .then((res) => {
         const menu = res.data;
         setSlides(menu || []);
@@ -101,7 +101,7 @@ const Animation = () => {
             ></div>
 
             {/* Dark gradient on the left side */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#201f31] to-transparent opacity-60"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#201f318f] to-transparent opacity-60"></div>
 
             {/* Full Slide Darkness Overlay */}
             <div
@@ -165,7 +165,7 @@ const Animation = () => {
           style={{
             flexDirection: "column",
           }}
-          className="absolute bottom-4 right-4 flex gap-2 sm:gap-1 z-30"
+          className="absolute bottom-4 right-4 flex gap-2 sm:gap-1 z-10"
         >
           {/* Visible only on medium and large screens */}
           <div className="sm:flex hidden flex-col justify-center items-center gap-2">

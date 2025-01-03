@@ -77,14 +77,14 @@ function Newcard() {
         <h2 className="text-xl font-semibold text-gray-800">
           <div className="flex items-center">
             <span className="bg-[#F81539] w-[6px] h-[15px] rounded-lg inline-block mr-4"></span>
-            <h2 className="text-xl font-semibold text-white">New anime</h2>
+            <h2 className="text-xl font-semibold text-white">Chiqarilmoqda</h2>
           </div>
         </h2>
         <Link
           to={"allnewCard"}
           className="flex items-center bg-transparent text-gray-500"
         >
-          Show All <AiOutlineArrowRight className="ml-2" />
+          Barchasni ko'rish <AiOutlineArrowRight className="ml-2" />
         </Link>
       </div>
 

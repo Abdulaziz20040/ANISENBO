@@ -3,34 +3,24 @@ import React, { useEffect, useState } from "react";
 import { CiBookmarkPlus, CiCircleInfo, CiHeart } from "react-icons/ci";
 import { GoPlay } from "react-icons/go";
 import { Link } from "react-router-dom";
-import { aniDubApi } from "../../Api/Api";
-import { useProduct } from "../../context/Context";
+import { aniDubApi } from "../Api/Api";
+import { useProduct } from "../context/Context";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
-function Card() {
+function Alltezkunda() {
   const [data, setData] = useState([]);
   const [hoveredItem, setHoveredItem] = useState(null);
   const [modalPosition, setModalPosition] = useState("right");
-  const [cardsToShow, setCardsToShow] = useState(18); // Initial cards to show
-  const { addToFavorite, favorite, deleteFromFavorite } = useProduct();
-
-  const handleFavorite = (item) => {
-    const isAdded = addToFavorite(item);
-    const isInFavorites = favorite.some((fav) => fav.id === item.id);
-
-    if (isInFavorites) {
-      deleteFromFavorite(item.id);
-    } else {
-      addToFavorite(item);
-    }
-  };
 
   useEffect(() => {
     axios.get(aniDubApi).then((res) => {
-      setData(res.data);
+      const filterDate = res.data.filter((item) => item.Tezkunda === true);
+      setData(filterDate);
     });
   }, []);
 
   const handleMouseEnter = (item, index) => {
+    // Calculate the modal position
     const card = document.getElementById(`card-${index}`);
     if (card) {
       const cardRect = card.getBoundingClientRect();
@@ -47,29 +37,27 @@ function Card() {
     setHoveredItem(null);
   };
 
-  const loadMoreCards = () => {
-    setCardsToShow(cardsToShow + 18);
-  };
-
   return (
-    <div className="container mt-0 flex flex-col justify-center">
+    <div className="container mt-5  flex flex-col justify-center">
       <div className="flex justify-between items-center mt-2 mb-5">
         <h2 className="text-xl font-semibold text-gray-800">
           <div className="flex items-center">
             <span className="bg-[#F81539] w-[6px] h-[15px] rounded-lg inline-block mr-4"></span>
-            <h2 className="text-xl font-semibold text-white">Top 100 +</h2>
+            <h2 className="text-xl font-semibold text-white">Tezkunda</h2>
           </div>
         </h2>
       </div>
 
       {/* Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-        {data.slice(0, cardsToShow).map((item, index) => (
+        {data.map((item, index) => (
           <div
             key={item.id}
             id={`card-${index}`}
             className="max-w-[200px] max-h-[270px] relative cursor-pointer group mb-14"
           >
+            {/* News Button */}
+
             {/* Image */}
             <Link to={`details/${item.id}`}>
               <div>
@@ -78,11 +66,12 @@ function Card() {
                   src={item.img}
                   alt={item.title}
                 />
+
                 {/* Title */}
                 <h2 className="text-start mt-1 font-semibold text-white overflow-hidden whitespace-nowrap text-ellipsis -tracking-2">
                   «{item.name}»
                 </h2>
-                <p className="line-clamp-1 text-stone-300 text-[13px]">
+                <p className=" line-clamp-1 text-stone-300 text-[13px]">
                   {item.desc}
                 </p>
 
@@ -110,48 +99,35 @@ function Card() {
               <div
                 className={`absolute -top-16 ${
                   modalPosition === "left" ? "right-8" : "left-full"
-                } background-trans ms-2 text-white p-6 w-[280px] rounded-xl shadow-2xl z-20 border border-gray-200`}
+                } bacgroountrans ms-2 text-white p-6 w-[280px] rounded-xl shadow-2xl z-20 border border-gray-200`}
                 onMouseEnter={() => handleMouseEnter(item, index)}
                 onMouseLeave={handleMouseLeave}
               >
-                <div className="w-full flex items-start justify-between">
+                <div className=" w-full flex items-start justify-between">
                   <h2 className="text-2xl font-semibold mb-3">
-                    <Link
-                      to={`/details/${item.id}`}
-                      className="hover:text-blue-200"
-                    >
-                      <q>{item.name}</q>
-                    </Link>
+                    <q>{item.name}</q>
                   </h2>
-                  <button
-                    onClick={() => handleFavorite(item)}
-                    className={`text-3xl ${
-                      favorite.some((fav) => fav.id === item.id)
-                        ? "text-red-500"
-                        : "text-gray-500"
-                    }`}
-                  >
-                    <CiBookmarkPlus />
-                  </button>
                 </div>
-                <p className="text-sm leading-relaxed overflow-y-auto h-[120px] custom-scrollbar mb-6">
+                <p className=" text-sm leading-relaxed overflow-y-auto h-[120px] custom-scrollbar mb-6">
                   {item.desc}
                 </p>
 
                 <div className="space-y-2">
                   <p className="text-sm">
-                    <span className="font-medium">Ko'rishlar:</span> {item.eye}
+                    <span className="font-medium">Ko'rishlar:</span>
+                    {item.eye}
                   </p>
                   <p className="text-sm">
-                    <span className="font-medium">Rejissyor:</span>{" "}
+                    <span className="font-medium">Rejissyor:</span>
                     {item.Director}
                   </p>
                   <p className="text-sm">
-                    <span className="font-medium">Qisimlar:</span>{" "}
+                    <span className="font-medium">Qisimlar:</span>
                     {item.NumberParts}
                   </p>
                   <p className="text-sm">
-                    <span className="font-medium">Davlati:</span> {item.Country}
+                    <span className="font-medium">Davlati:</span>
+                    {item.Country}
                   </p>
                   <p className="text-sm">
                     <span className="font-medium">Yili:</span> {item.data}
@@ -162,20 +138,8 @@ function Card() {
           </div>
         ))}
       </div>
-
-      {/* Show More Button */}
-      {cardsToShow < data.length && (
-        <div className="flex justify-center mt-6">
-          <button
-            onClick={loadMoreCards}
-            className="bg-[#F81539] text-white py-2 px-6 rounded-full hover:bg-red-600 transition duration-300"
-          >
-            Ko'proq ko'rsatish
-          </button>
-        </div>
-      )}
     </div>
   );
 }
 
-export default Card;
+export default Alltezkunda;
